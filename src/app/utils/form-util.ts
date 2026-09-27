@@ -1,9 +1,10 @@
 import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
 
 export class FormUtil {
+
   private static getTextError(erros: ValidationErrors) {
     for (const key of Object.keys(erros)) {
-      console.log('getFieldErrors => ' + key);
+      //console.log('getFieldErrors => ' + key);
       switch (key) {
         case 'required':
           return 'Este campo es requerido';
@@ -17,7 +18,7 @@ export class FormUtil {
   }
 
   static isValidField(myForm: FormGroup, field: string): boolean | null {
-    return myForm.controls[field].errors && myForm.controls[field].touched;
+    return !!myForm.controls[field].errors && myForm.controls[field].touched;
   }
 
   static getFieldErrors(myForm: FormGroup, field: string): string | null {
@@ -30,5 +31,13 @@ export class FormUtil {
   static isValidFieldInArray(formArray: FormArray, index: number): boolean | null {
     return formArray.controls[index].errors && formArray.controls[index].touched;
   }
+
+  static getFieldErrorInArray(formArray: FormArray, index: number): string | null {
+    if (formArray.controls.length === 0) return null;
+    const errors = formArray.controls[index].errors ?? {};
+    return FormUtil.getTextError(errors);
+  }
+
+
 
 }
