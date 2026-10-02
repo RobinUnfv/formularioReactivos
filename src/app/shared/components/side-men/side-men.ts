@@ -24,7 +24,7 @@ export class SideMen {
 
   authMenu: MenuItem[] = [{
     title: 'Registro',
-    route: './auth'
+    route: 'auth/sign-up'
   }];
 
   countryMenu: MenuItem[] = [
